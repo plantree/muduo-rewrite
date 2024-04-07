@@ -1,7 +1,15 @@
 #!/bin/bash
 
-rm -rf build
-mkdir build
+# format first
+find src/ -type f \( -name "*.h" -o -name "*.cpp" \) -print0 | while IFS= read -r -d $'\0' file; do
+    echo "Formatting $file"
+    clang-format -i -style=file $file
+done
+
+# build
+if [ ! -d "build" ]; then
+    mkdir build
+fi
 cd build
 
 BUILD_MODE=${1:-Debug}
@@ -12,9 +20,17 @@ if [[ "$BUILD_MODE" != "Debug" && "$BUILD_MODE" != "Release" ]]; then
 fi
 
 echo "Building in $BUILD_MODE mode"
+if [ -d $BUILD_MODE ]; then
+    rm -rf $BUILD_MODE
+fi
 mkdir $BUILD_MODE
 cd $BUILD_MODE
 cmake -DCMAKE_BUILD_TYPE=$BUILD_MODE ../..
 make
+
+if [ $? -ne 0 ]; then
+    echo "Build failed in $BUILD_MODE mode!"
+    exit 1
+fi
 
 echo "Build completed successfully in $BUILD_MODE mode!"
