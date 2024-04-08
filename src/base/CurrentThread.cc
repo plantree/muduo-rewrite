@@ -7,7 +7,7 @@
 namespace muduo_rewrite {
 namespace CurrentThread {
 
-__thread int         t_cachedTid = 0;
+__thread pid_t       t_cachedTid = 0;
 __thread char        t_tidString[32];
 __thread int         t_tidStringLength = 6;
 __thread const char* t_threadName      = "unknown";
@@ -37,7 +37,7 @@ stackTrace(bool demangle) {
                         plus = p;
                     }
                 }
-                
+
                 if (left_par && plus) {
                     *plus        = '\0';
                     int   status = 0;

@@ -14,7 +14,7 @@
 namespace muduo_rewrite {
 
 namespace CurrentThread {
-extern __thread int         t_cachedTid;
+extern __thread pid_t       t_cachedTid;
 extern __thread char        t_tidString[32];
 extern __thread int         t_tidStringLength;
 extern __thread const char* t_threadName;
@@ -41,6 +41,9 @@ tidStringLength() {
 
 bool
 isMainThread();
+
+void
+sleepUsec(int64_t usec);
 
 std::string
 stackTrace(bool demangle);

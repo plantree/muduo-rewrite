@@ -18,18 +18,19 @@ class Thread : noncopyable {
     explicit Thread(ThreadFunc, const std::string& name = std::string());
     ~Thread();
 
-    void Start();
-    int  Join();
+    void  start();
+    int   join();
+    pid_t tid() const { return tid_; }
 
-    bool               Started() const { return started_; }
-    std::thread::id    Id() const { return thread_.get_id(); }
-    const std::string& Name() const { return name_; }
+    bool               started() const { return started_; }
+    const std::string& name() const { return name_; }
 
     static int numCreated() { return numCreated_; }
 
   private:
     void setDefaultName();
 
+    pid_t       tid_;
     bool        started_;
     bool        joined_;
     std::thread thread_;
