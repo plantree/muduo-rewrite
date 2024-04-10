@@ -34,3 +34,6 @@
 build/
 .cache/
 .vscode/
+
+src/absl/
+third_party/*

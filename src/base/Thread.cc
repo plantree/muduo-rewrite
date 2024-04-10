@@ -10,8 +10,6 @@
 
 namespace muduo_rewrite {
 
-constexpr int kMicroSecondsPerSecond = 1000 * 1000;
-
 namespace detail {
 
 pid_t gettid() {
