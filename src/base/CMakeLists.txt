@@ -24,3 +24,12 @@ target_link_libraries(Check_unittest base absl::log)
 
 add_executable(ThreadLocal_unittest ThreadLocal_unittest.cc)
 target_link_libraries(ThreadLocal_unittest base absl::log)
+
+add_executable(no_destructor_unittest no_destructor_unittest.cc)
+target_link_libraries(no_destructor_unittest base absl::log Catch2::Catch2WithMain)
+
+add_executable(Singleton_unittest Singleton_unittest.cc)
+target_link_libraries(Singleton_unittest base absl::log)
+
+add_executable(ThreadPool_unittest ThreadPool_unittest.cc)
+target_link_libraries(ThreadPool_unittest base absl::log)
