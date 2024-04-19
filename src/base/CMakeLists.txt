@@ -33,3 +33,6 @@ target_link_libraries(Singleton_unittest base absl::log)
 
 add_executable(ThreadPool_unittest ThreadPool_unittest.cc)
 target_link_libraries(ThreadPool_unittest base absl::log)
+
+add_executable(CountDownLatch_unittest CountDownLatch_unittest.cc)
+target_link_libraries(CountDownLatch_unittest base absl::log)
