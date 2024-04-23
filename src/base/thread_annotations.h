@@ -4,9 +4,9 @@
 // Partly copy from chromium.
 
 #if defined(__clang__)
-    #define THREAD_ANNOTATION_ATTRIBUTE__(x) __attribute__((x))
+#define THREAD_ANNOTATION_ATTRIBUTE__(x) __attribute__((x))
 #else
-    #define THREAD_ANNOTATION_ATTRIBUTE__(x)  // no-op
+#define THREAD_ANNOTATION_ATTRIBUTE__(x)  // no-op
 #endif
 
 #define GUARDED_BY(x) THREAD_ANNOTATION_ATTRIBUTE__((guarded_by(x)))

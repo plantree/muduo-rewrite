@@ -12,34 +12,36 @@ namespace muduo_rewrite {
 
 template <typename T>
 class NoDestructor {
-  public:
-    static_assert(!(std::is_trivially_constructible_v<T> && std::is_trivially_destructible_v<T>),
-                  "T is trivially constructible and destructible, NoDestructor is unnecessary");
-    static_assert(!std::is_trivially_destructible_v<T>,
-                  "T is trivially destructible, NoDestructor is unnecessary");
+ public:
+  static_assert(!(std::is_trivially_constructible_v<T> &&
+                  std::is_trivially_destructible_v<T>),
+                "T is trivially constructible and destructible, NoDestructor "
+                "is unnecessary");
+  static_assert(!std::is_trivially_destructible_v<T>,
+                "T is trivially destructible, NoDestructor is unnecessary");
 
-    template <typename... Args>
-    explicit NoDestructor(Args&&... args) {
-        new (storage_) T(std::forward<Args>(args)...);
-    }
+  template <typename... Args>
+  explicit NoDestructor(Args&&... args) {
+    new (storage_) T(std::forward<Args>(args)...);
+  }
 
-    // Allow copy and move construction.
-    explicit NoDestructor(const T& x) { new (storage_) T(x); }
-    explicit NoDestructor(T&& x) { new (storage_) T(std::move(x)); }
+  // Allow copy and move construction.
+  explicit NoDestructor(const T& x) { new (storage_) T(x); }
+  explicit NoDestructor(T&& x) { new (storage_) T(std::move(x)); }
 
-    const T& operator*() const { return *get(); }
-    T&       operator*() { return *get(); }
+  const T& operator*() const { return *get(); }
+  T& operator*() { return *get(); }
 
-    const T* operator->() const { return get(); }
-    T*       operator->() { return get(); }
+  const T* operator->() const { return get(); }
+  T* operator->() { return get(); }
 
-    const T* get() const { return reinterpret_cast<const T*>(storage_); }
-    T*       get() { return reinterpret_cast<T*>(storage_); }
+  const T* get() const { return reinterpret_cast<const T*>(storage_); }
+  T* get() { return reinterpret_cast<T*>(storage_); }
 
-    ~NoDestructor() = default;
+  ~NoDestructor() = default;
 
-  private:
-    alignas(T) char storage_[sizeof(T)];
+ private:
+  alignas(T) char storage_[sizeof(T)];
 };
 
 }  // namespace muduo_rewrite

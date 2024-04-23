@@ -4,7 +4,7 @@ file(GLOB SRC_FILES *.cc)
 list(FILTER SRC_FILES EXCLUDE REGEX ".*_unittest.cc")
 
 add_library(base ${SRC_FILES})
-target_link_libraries(base pthread)
+target_link_libraries(base pthread stdc++fs)
 
 find_package(Catch2 2 REQUIRED)
 
@@ -36,3 +36,9 @@ target_link_libraries(ThreadPool_unittest base absl::log)
 
 add_executable(CountDownLatch_unittest CountDownLatch_unittest.cc)
 target_link_libraries(CountDownLatch_unittest base absl::log)
+
+add_executable(Utils_unittest Utils_unittest.cc)
+target_link_libraries(Utils_unittest base Catch2::Catch2WithMain absl::log)
+
+add_executable(ProcessInfo_unittest ProcessInfo_unittest.cc)
+target_link_libraries(ProcessInfo_unittest base absl::log)

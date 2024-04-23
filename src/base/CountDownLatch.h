@@ -4,23 +4,23 @@
 #include <condition_variable>
 #include <mutex>
 
-#include "base/thread_annotations.h"
 #include "base/noncopyable.h"
+#include "base/thread_annotations.h"
 
 namespace muduo_rewrite {
 
 class CountDownLatch : noncopyable {
-  public:
-    explicit CountDownLatch(int count);
-    void wait();
+ public:
+  explicit CountDownLatch(int count);
+  void wait();
 
-    void countDown();
-    int  getCount() const;
+  void countDown();
+  int getCount() const;
 
-  private:
-    mutable std::mutex                 mutex_;
-    std::condition_variable condition_ GUARDED_BY(mutex_);
-    int count_                         GUARDED_BY(mutex_);
+ private:
+  mutable std::mutex mutex_;
+  std::condition_variable condition_ GUARDED_BY(mutex_);
+  int count_ GUARDED_BY(mutex_);
 };
 
 }  // namespace muduo_rewrite

@@ -12,32 +12,32 @@
 namespace muduo_rewrite {
 
 class Thread : noncopyable {
-  public:
-    using ThreadFunc = std::function<void()>;
+ public:
+  using ThreadFunc = std::function<void()>;
 
-    explicit Thread(ThreadFunc, const std::string& name = std::string());
-    ~Thread();
+  explicit Thread(ThreadFunc, const std::string& name = std::string());
+  ~Thread();
 
-    void  start();
-    int   join();
-    pid_t tid() const { return tid_; }
+  void start();
+  int join();
+  pid_t tid() const { return tid_; }
 
-    bool               started() const { return started_; }
-    const std::string& name() const { return name_; }
+  bool started() const { return started_; }
+  const std::string& name() const { return name_; }
 
-    static int numCreated() { return numCreated_; }
+  static int numCreated() { return numCreated_; }
 
-  private:
-    void setDefaultName();
+ private:
+  void setDefaultName();
 
-    pid_t       tid_;
-    bool        started_;
-    bool        joined_;
-    std::thread thread_;
-    ThreadFunc  func_;
-    std::string name_;
+  pid_t tid_;
+  bool started_;
+  bool joined_;
+  std::thread thread_;
+  ThreadFunc func_;
+  std::string name_;
 
-    static std::atomic_int numCreated_;
+  static std::atomic_int numCreated_;
 };
 
 }  // namespace muduo_rewrite

@@ -4,13 +4,13 @@
 namespace muduo_rewrite {
 
 class noncopyable {
-  public:
-    noncopyable(const noncopyable&)    = delete;
-    void operator=(const noncopyable&) = delete;
+ public:
+  noncopyable(const noncopyable&) = delete;
+  void operator=(const noncopyable&) = delete;
 
-  protected:
-    noncopyable()  = default;
-    ~noncopyable() = default;
+ protected:
+  noncopyable() = default;
+  ~noncopyable() = default;
 };
 
 }  // namespace muduo_rewrite
