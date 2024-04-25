@@ -42,3 +42,6 @@ target_link_libraries(Utils_unittest base Catch2::Catch2WithMain absl::log)
 
 add_executable(ProcessInfo_unittest ProcessInfo_unittest.cc)
 target_link_libraries(ProcessInfo_unittest base absl::log)
+
+add_executable(BlockingQueue_unittest BlockingQueue_unittest.cc)
+target_link_libraries(BlockingQueue_unittest base absl::log)
