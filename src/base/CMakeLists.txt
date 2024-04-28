@@ -45,3 +45,6 @@ target_link_libraries(ProcessInfo_unittest base absl::log)
 
 add_executable(BlockingQueue_unittest BlockingQueue_unittest.cc)
 target_link_libraries(BlockingQueue_unittest base absl::log)
+
+add_executable(BoundedBlockingQueue_unittest BoundedBlockingQueue_unittest.cc)
+target_link_libraries(BoundedBlockingQueue_unittest base absl::log)
