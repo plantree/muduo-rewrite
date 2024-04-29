@@ -51,3 +51,6 @@ target_link_libraries(BoundedBlockingQueue_unittest base absl::log)
 
 add_executable(LogStream_unittest LogStream_unittest.cc)
 target_link_libraries(LogStream_unittest base absl::log Catch2::Catch2WithMain)
+
+add_executable(AsyncLogging_unittest AsyncLogging_unittest.cc)
+target_link_libraries(AsyncLogging_unittest base absl::log)
