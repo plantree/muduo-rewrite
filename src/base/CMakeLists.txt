@@ -48,3 +48,6 @@ target_link_libraries(BlockingQueue_unittest base absl::log)
 
 add_executable(BoundedBlockingQueue_unittest BoundedBlockingQueue_unittest.cc)
 target_link_libraries(BoundedBlockingQueue_unittest base absl::log)
+
+add_executable(LogStream_unittest LogStream_unittest.cc)
+target_link_libraries(LogStream_unittest base absl::log Catch2::Catch2WithMain)
