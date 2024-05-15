@@ -4,6 +4,7 @@ file(GLOB SRC_FILES *.cc)
 list(FILTER SRC_FILES EXCLUDE REGEX ".*_unittest.cc")
 
 add_library(base ${SRC_FILES})
+
 target_link_libraries(base pthread stdc++fs)
 
 find_package(Catch2 2 REQUIRED)
