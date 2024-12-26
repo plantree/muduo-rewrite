@@ -1,6 +1,7 @@
 #ifndef MUDUO_REWRITE_BASE_CURRENTTHREAD_H
 #define MUDUO_REWRITE_BASE_CURRENTTHREAD_H
 
+// Provide the compiler with branch prediction information.
 #if defined(__GNUC__) || defined(__clang__)
 #define likely(x) __builtin_expect(!!(x), 1)
 #define unlikely(x) __builtin_expect(!!(x), 0)
@@ -12,7 +13,6 @@
 #include <string>
 
 namespace muduo_rewrite {
-
 namespace CurrentThread {
 extern __thread pid_t t_cachedTid;
 extern __thread char t_tidString[32];

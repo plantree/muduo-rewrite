@@ -1,12 +1,14 @@
 #ifndef MUDUO_REWRITE_BASE_THREAD_H
 #define MUDUO_REWRITE_BASE_THREAD_H
 
+#include <pthread.h>
+
 #include <atomic>
 #include <functional>
 #include <memory>
 #include <string>
-#include <thread>
 
+#include "base/CountDownLatch.h"
 #include "noncopyable.h"
 
 namespace muduo_rewrite {
@@ -20,22 +22,25 @@ class Thread : noncopyable {
 
   void start();
   int join();
-  pid_t tid() const { return tid_; }
 
   bool started() const { return started_; }
+  pid_t tid() const { return tid_; }
   const std::string& name() const { return name_; }
 
-  static int numCreated() { return numCreated_; }
+  static int numCreated() {
+    return numCreated_.load(std::memory_order_relaxed);
+  }
 
  private:
   void setDefaultName();
 
-  pid_t tid_;
   bool started_;
   bool joined_;
-  std::thread thread_;
+  pthread_t pthreadId_;
+  pid_t tid_;
   ThreadFunc func_;
   std::string name_;
+  CountDownLatch latch_;
 
   static std::atomic_int numCreated_;
 };

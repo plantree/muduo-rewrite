@@ -1,8 +1,11 @@
+#include <unistd.h>
+
 #include "base/CurrentThread.h"
 #include "base/Thread.h"
 
 void mysleep(int seconds) {
-    std::this_thread::sleep_for(std::chrono::seconds(seconds));
+    timespec t = {seconds, 0};
+    nanosleep(&t, nullptr);
 }
 
 void threadFunc() {

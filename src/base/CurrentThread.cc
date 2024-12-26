@@ -1,8 +1,8 @@
-#include "base/CurrentThread.h"
-
 #include <cxxabi.h>
 #include <execinfo.h>
 #include <stdlib.h>
+
+#include "base/CurrentThread.h"
 
 namespace muduo_rewrite {
 namespace CurrentThread {
@@ -12,8 +12,8 @@ __thread char        t_tidString[32];
 __thread int         t_tidStringLength = 6;
 __thread const char* t_threadName      = "unknown";
 
-std::string
-stackTrace(bool demangle) {
+// Reference: https://panthema.net/2008/0901-stacktrace-demangled/
+std::string stackTrace(bool demangle) {
     std::string stack;
 
     const int max_frames = 200;

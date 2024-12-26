@@ -17,8 +17,8 @@ find_package(Catch2 2 REQUIRED)
 add_executable(Exception_unittest Exception_unittest.cc)
 target_link_libraries(Exception_unittest base)
 
-add_executable(Thread_unitest Thread_unittest.cc)
-target_link_libraries(Thread_unitest base)
+add_executable(Thread_unittest Thread_unittest.cc)
+target_link_libraries(Thread_unittest base absl::log)
 
 add_executable(Check_unittest Check_unittest.cc)
 target_link_libraries(Check_unittest base absl::log)
