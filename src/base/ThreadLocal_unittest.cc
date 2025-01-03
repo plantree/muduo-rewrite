@@ -1,9 +1,9 @@
+#include "absl/log/log.h"
+
 #include "base/CurrentThread.h"
 #include "base/Thread.h"
 #include "base/ThreadLocal.h"
 #include "base/noncopyable.h"
-
-#include "absl/log/log.h"
 
 class Test : muduo_rewrite::noncopyable {
 public:

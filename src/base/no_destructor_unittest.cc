@@ -83,5 +83,4 @@ TEST_CASE("[Accessors]", "NoDestructor") {
     REQUIRE(s.get()->compare("Hello, world") == 0);
 }
 
-
 }  // namespace muduo_rewrite
